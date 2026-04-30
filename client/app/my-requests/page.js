@@ -1,10 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import API_URL from "../../utils/api";
+import LogoutButton from "../../components/LogoutButton";
 
 export default function MyRequests() {
+const router = useRouter();
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -38,9 +41,16 @@ export default function MyRequests() {
     }
   };
 
-  useEffect(() => {
-    fetchMyRequests();
-  }, []);
+useEffect(() => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    router.replace("/login");
+    return;
+  }
+
+  fetchMyRequests();
+}, [router]);
 
   const statusClass = {
     pending: "bg-yellow-300 text-black",
@@ -68,6 +78,7 @@ export default function MyRequests() {
           >
             Dashboard
           </Link>
+          <LogoutButton />
         </nav>
 
         <div className="mb-10">

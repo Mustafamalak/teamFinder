@@ -1,12 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+
 import Link from "next/link";
 import API_URL from "../../utils/api";
 
 export default function CreatePost() {
   const router = useRouter();
+
+  useEffect(() => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    router.replace("/login");
+  }
+}, [router]);
 
   const [form, setForm] = useState({
     title: "",
@@ -99,6 +108,7 @@ export default function CreatePost() {
           >
             Back to Dashboard
           </Link>
+          <LogoutButton />
         </nav>
 
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">

@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import API_URL from "../../utils/api";
+import LogoutButton from "@/components/LogoutButton";
 
 function TiltCard({ post, onJoin }) {
   const [style, setStyle] = useState({});
@@ -19,6 +21,8 @@ function TiltCard({ post, onJoin }) {
 
     const rotateX = ((y - centerY) / centerY) * -6;
     const rotateY = ((x - centerX) / centerX) * 6;
+
+
 
     setStyle({
       transform: `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`,
@@ -82,6 +86,8 @@ function TiltCard({ post, onJoin }) {
 }
 
 export default function Dashboard() {
+  const router = useRouter();
+
   const [posts, setPosts] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [skill, setSkill] = useState("");
@@ -143,9 +149,16 @@ export default function Dashboard() {
     }
   };
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+ useEffect(() => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    router.replace("/login");
+    return;
+  }
+
+  fetchPosts();
+}, [router]);
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#060816] text-white">
@@ -188,6 +201,8 @@ export default function Dashboard() {
   >
     Create Post
   </Link>
+
+  <LogoutButton />
 </div>
         </nav>
 

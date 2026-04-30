@@ -1,10 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import API_URL from "../../utils/api";
+import LogoutButton from "../../components/LogoutButton";
 
 export default function Profile() {
+  const router = useRouter();
+  
   const [form, setForm] = useState({
     name: "",
     bio: "",
@@ -101,9 +105,16 @@ export default function Profile() {
     }
   };
 
-  useEffect(() => {
-    fetchProfile();
-  }, []);
+useEffect(() => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    router.replace("/login");
+    return;
+  }
+
+  fetchProfile();
+}, [router]);
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#060816] text-white">
@@ -125,6 +136,7 @@ export default function Profile() {
           >
             Dashboard
           </Link>
+            <LogoutButton />
         </nav>
 
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
