@@ -162,6 +162,12 @@ export default function Dashboard() {
           </Link>
 
           <div className="flex items-center gap-3">
+            <Link
+  href="/profile"
+  className="rounded-2xl border border-white/10 bg-black/20 px-5 py-2.5 text-sm font-semibold text-white transition hover:scale-105 hover:bg-white hover:text-black"
+>
+  Profile
+</Link>
   <Link
     href="/my-requests"
     className="rounded-2xl border border-white/10 bg-black/20 px-5 py-2.5 text-sm font-semibold text-white transition hover:scale-105 hover:bg-white hover:text-black"
