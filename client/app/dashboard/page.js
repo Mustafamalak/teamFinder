@@ -22,8 +22,6 @@ function TiltCard({ post, onJoin }) {
     const rotateX = ((y - centerY) / centerY) * -6;
     const rotateY = ((x - centerX) / centerX) * 6;
 
-
-
     setStyle({
       transform: `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`,
     });
@@ -31,7 +29,8 @@ function TiltCard({ post, onJoin }) {
 
   const handleMouseLeave = () => {
     setStyle({
-      transform: "perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px)",
+      transform:
+        "perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px)",
     });
   };
 
@@ -149,16 +148,16 @@ export default function Dashboard() {
     }
   };
 
- useEffect(() => {
-  const token = localStorage.getItem("token");
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
-  if (!token) {
-    router.replace("/login");
-    return;
-  }
+    if (!token) {
+      router.replace("/login");
+      return;
+    }
 
-  fetchPosts();
-}, [router]);
+    fetchPosts();
+  }, [router]);
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#060816] text-white">
@@ -176,34 +175,34 @@ export default function Dashboard() {
 
           <div className="flex items-center gap-3">
             <Link
-  href="/profile"
-  className="rounded-2xl border border-white/10 bg-black/20 px-5 py-2.5 text-sm font-semibold text-white transition hover:scale-105 hover:bg-white hover:text-black"
->
-  Profile
-</Link>
-  <Link
-    href="/my-requests"
-    className="rounded-2xl border border-white/10 bg-black/20 px-5 py-2.5 text-sm font-semibold text-white transition hover:scale-105 hover:bg-white hover:text-black"
-  >
-    My Requests
-  </Link>
+              href="/profile"
+              className="rounded-2xl border border-white/10 bg-black/20 px-5 py-2.5 text-sm font-semibold text-white transition hover:scale-105 hover:bg-white hover:text-black"
+            >
+              Profile
+            </Link>
+            <Link
+              href="/my-requests"
+              className="rounded-2xl border border-white/10 bg-black/20 px-5 py-2.5 text-sm font-semibold text-white transition hover:scale-105 hover:bg-white hover:text-black"
+            >
+              My Requests
+            </Link>
 
-  <Link
-    href="/manage-requests"
-    className="rounded-2xl border border-white/10 bg-black/20 px-5 py-2.5 text-sm font-semibold text-white transition hover:scale-105 hover:bg-white hover:text-black"
-  >
-    Manage
-  </Link>
+            <Link
+              href="/manage-requests"
+              className="rounded-2xl border border-white/10 bg-black/20 px-5 py-2.5 text-sm font-semibold text-white transition hover:scale-105 hover:bg-white hover:text-black"
+            >
+              Manage
+            </Link>
 
-  <Link
-    href="/create-post"
-    className="rounded-2xl bg-white px-5 py-2.5 text-sm font-semibold text-black transition hover:scale-105"
-  >
-    Create Post
-  </Link>
+            <Link
+              href="/create-post"
+              className="rounded-2xl bg-white px-5 py-2.5 text-sm font-semibold text-black transition hover:scale-105"
+            >
+              Create Post
+            </Link>
 
-  <LogoutButton />
-</div>
+            <LogoutButton />
+          </div>
         </nav>
 
         <div className="mb-10 grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
@@ -214,7 +213,7 @@ export default function Dashboard() {
 
             <h1 className="max-w-3xl text-5xl font-black leading-tight tracking-tight md:text-6xl">
               Build your next{" "}
-              <span className="bg-gradient-to-r from-cyan-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-cyan-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
                 winning team
               </span>
             </h1>
@@ -245,7 +244,7 @@ export default function Dashboard() {
 
               <button
                 onClick={fetchPosts}
-                className="w-full rounded-2xl bg-gradient-to-r from-cyan-300 to-purple-300 px-4 py-3 text-sm font-bold text-black transition hover:scale-[1.02]"
+                className="w-full rounded-2xl bg-linear-to-r from-cyan-300 to-purple-300 px-4 py-3 text-sm font-bold text-black transition hover:scale-[1.02]"
               >
                 Apply Filters
               </button>
@@ -272,11 +271,7 @@ export default function Dashboard() {
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
-              <TiltCard
-                key={post._id}
-                post={post}
-                onJoin={handleJoinRequest}
-              />
+              <TiltCard key={post._id} post={post} onJoin={handleJoinRequest} />
             ))}
           </div>
         )}

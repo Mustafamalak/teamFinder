@@ -8,7 +8,7 @@ import LogoutButton from "../../components/LogoutButton";
 
 export default function Profile() {
   const router = useRouter();
-  
+
   const [form, setForm] = useState({
     name: "",
     bio: "",
@@ -105,16 +105,16 @@ export default function Profile() {
     }
   };
 
-useEffect(() => {
-  const token = localStorage.getItem("token");
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
-  if (!token) {
-    router.replace("/login");
-    return;
-  }
+    if (!token) {
+      router.replace("/login");
+      return;
+    }
 
-  fetchProfile();
-}, [router]);
+    fetchProfile();
+  }, [router]);
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#060816] text-white">
@@ -136,7 +136,7 @@ useEffect(() => {
           >
             Dashboard
           </Link>
-            <LogoutButton />
+          <LogoutButton />
         </nav>
 
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
@@ -147,7 +147,7 @@ useEffect(() => {
 
             <h1 className="text-5xl font-black leading-tight tracking-tight">
               Complete your{" "}
-              <span className="bg-gradient-to-r from-cyan-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-cyan-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
                 profile
               </span>
             </h1>
@@ -162,14 +162,14 @@ useEffect(() => {
 
               <div className="mt-4 h-3 overflow-hidden rounded-full bg-white/10">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-cyan-300 to-purple-300 transition-all"
+                  className="h-full rounded-full bg-linear-to-r from-cyan-300 to-purple-300 transition-all"
                   style={{
                     width: `${
                       form.name && form.bio && skillsPreview.length > 0
                         ? "100%"
                         : form.name && skillsPreview.length > 0
-                        ? "70%"
-                        : "35%"
+                          ? "70%"
+                          : "35%"
                     }`,
                   }}
                 />
@@ -282,7 +282,7 @@ useEffect(() => {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="w-full rounded-2xl bg-gradient-to-r from-cyan-300 to-purple-300 px-5 py-4 font-bold text-black transition hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60"
+                  className="w-full rounded-2xl bg-linear-to-r from-cyan-300 to-purple-300 px-5 py-4 font-bold text-black transition hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {saving ? "Saving Profile..." : "Save Profile"}
                 </button>

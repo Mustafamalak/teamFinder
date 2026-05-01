@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema(
       default: "Beginner",
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 module.exports = mongoose.model("user", userSchema);

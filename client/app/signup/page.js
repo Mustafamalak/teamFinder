@@ -124,7 +124,7 @@ export default function Signup() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full rounded-2xl bg-gradient-to-r from-cyan-300 to-purple-300 px-5 py-4 font-bold text-black transition hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60"
+                className="w-full rounded-2xl bg-linear-to-r from-cyan-300 to-purple-300 px-5 py-4 font-bold text-black transition hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {loading ? "Creating account..." : "Sign Up"}
               </button>
@@ -150,7 +150,7 @@ export default function Signup() {
 
           <h1 className="max-w-2xl text-5xl font-black leading-tight tracking-tight md:text-6xl">
             Meet students who{" "}
-            <span className="bg-gradient-to-r from-cyan-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-cyan-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
               match your skills
             </span>
           </h1>

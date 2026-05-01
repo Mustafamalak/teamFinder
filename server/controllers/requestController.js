@@ -11,10 +11,16 @@ exports.sendRequest = async (req, res) => {
     }
 
     if (post.createdBy.toString() === req.user._id.toString()) {
-      return res.status(400).json({ msg: "You cannot request to join your own team" });
+      return res
+        .status(400)
+        .json({ msg: "You cannot request to join your own team" });
     }
 
-    if (post.members.some((member) => member.toString() === req.user._id.toString())) {
+    if (
+      post.members.some(
+        (member) => member.toString() === req.user._id.toString(),
+      )
+    ) {
       return res.status(400).json({ msg: "You are already a team member" });
     }
 
@@ -70,7 +76,9 @@ exports.handleRequest = async (req, res) => {
     }
 
     if (post.createdBy.toString() !== req.user._id.toString()) {
-      return res.status(403).json({ msg: "Not authorized to handle this request" });
+      return res
+        .status(403)
+        .json({ msg: "Not authorized to handle this request" });
     }
 
     if (action === "accept") {
@@ -78,7 +86,11 @@ exports.handleRequest = async (req, res) => {
         return res.status(400).json({ msg: "Team is already full" });
       }
 
-      if (!post.members.some((member) => member.toString() === request.sender.toString())) {
+      if (
+        !post.members.some(
+          (member) => member.toString() === request.sender.toString(),
+        )
+      ) {
         post.members.push(request.sender);
       }
 
@@ -106,7 +118,10 @@ exports.handleRequest = async (req, res) => {
 exports.getMyRequests = async (req, res) => {
   try {
     const requests = await Request.find({ sender: req.user._id })
-      .populate("postId", "title description requiredSkills teamSize members createdBy")
+      .populate(
+        "postId",
+        "title description requiredSkills teamSize members createdBy",
+      )
       .sort({ createdAt: -1 });
 
     res.json(requests);

@@ -5,17 +5,18 @@ import { useRouter } from "next/navigation";
 
 import Link from "next/link";
 import API_URL from "../../utils/api";
+import LogoutButton from "../../components/LogoutButton";
 
 export default function CreatePost() {
   const router = useRouter();
 
   useEffect(() => {
-  const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-  if (!token) {
-    router.replace("/login");
-  }
-}, [router]);
+    if (!token) {
+      router.replace("/login");
+    }
+  }, [router]);
 
   const [form, setForm] = useState({
     title: "",
@@ -119,7 +120,7 @@ export default function CreatePost() {
 
             <h1 className="text-5xl font-black leading-tight tracking-tight">
               Create a{" "}
-              <span className="bg-gradient-to-r from-cyan-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-cyan-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
                 team post
               </span>
             </h1>
@@ -235,7 +236,7 @@ export default function CreatePost() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full rounded-2xl bg-gradient-to-r from-cyan-300 to-purple-300 px-5 py-4 font-bold text-black transition hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60"
+                className="w-full rounded-2xl bg-linear-to-r from-cyan-300 to-purple-300 px-5 py-4 font-bold text-black transition hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {loading ? "Creating Post..." : "Create Team Post"}
               </button>

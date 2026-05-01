@@ -8,7 +8,7 @@ import LogoutButton from "../../components/LogoutButton";
 
 export default function ManageRequests() {
   const router = useRouter();
-    
+
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [updatingId, setUpdatingId] = useState(null);
@@ -73,16 +73,16 @@ export default function ManageRequests() {
     }
   };
 
-useEffect(() => {
-  const token = localStorage.getItem("token");
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
-  if (!token) {
-    router.replace("/login");
-    return;
-  }
+    if (!token) {
+      router.replace("/login");
+      return;
+    }
 
-  fetchIncomingRequests();
-}, [router]);
+    fetchIncomingRequests();
+  }, [router]);
 
   const statusClass = {
     pending: "bg-yellow-300 text-black",
@@ -120,7 +120,7 @@ useEffect(() => {
 
           <h1 className="text-5xl font-black tracking-tight">
             Manage{" "}
-            <span className="bg-gradient-to-r from-cyan-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-cyan-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
               Requests
             </span>
           </h1>

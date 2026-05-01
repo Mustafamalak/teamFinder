@@ -1,28 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-* {
-  box-sizing: border-box;
-}
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
 
-html {
-  scroll-behavior: smooth;
-}
+  body {
+    background: #060816;
+  }
 
-body {
-  background: #060816;
-}
-
-::selection {
-  background: rgba(103, 232, 249, 0.35);
-  color: white;
-}
-
-.line-clamp-3 {
-  display: -webkit-box;
-  line-clamp: 3;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  ::selection {
+    background: rgba(103, 232, 249, 0.35);
+    color: white;
+  }
 }

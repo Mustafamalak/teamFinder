@@ -5,11 +5,15 @@ exports.createPost = async (req, res) => {
   const { title, description, requiredSkills, teamSize } = req.body;
 
   if (!title || !description || !teamSize) {
-    return res.status(400).json({ msg: "Title, description, and teamSize are required" });
+    return res
+      .status(400)
+      .json({ msg: "Title, description, and teamSize are required" });
   }
 
   if (isNaN(teamSize) || teamSize < 2) {
-    return res.status(400).json({ msg: "teamSize must be a number of at least 2" });
+    return res
+      .status(400)
+      .json({ msg: "teamSize must be a number of at least 2" });
   }
 
   try {
@@ -45,7 +49,11 @@ exports.getPosts = async (req, res) => {
       : {};
 
     const skills = req.query.skills
-      ? { requiredSkills: { $in: req.query.skills.split(",").map((s) => s.trim()) } }
+      ? {
+          requiredSkills: {
+            $in: req.query.skills.split(",").map((s) => s.trim()),
+          },
+        }
       : {};
 
     const filter = { ...keyword, ...skills };
@@ -95,13 +103,17 @@ exports.updatePost = async (req, res) => {
     if (!post) return res.status(404).json({ msg: "Post not found" });
 
     if (post.createdBy.toString() !== req.user._id.toString()) {
-      return res.status(403).json({ msg: "Not authorized to update this post" });
+      return res
+        .status(403)
+        .json({ msg: "Not authorized to update this post" });
     }
 
     const { title, description, requiredSkills, teamSize } = req.body;
 
     if (teamSize !== undefined && (isNaN(teamSize) || teamSize < 2)) {
-      return res.status(400).json({ msg: "teamSize must be a number of at least 2" });
+      return res
+        .status(400)
+        .json({ msg: "teamSize must be a number of at least 2" });
     }
 
     post.title = title || post.title;
@@ -125,7 +137,9 @@ exports.deletePost = async (req, res) => {
     if (!post) return res.status(404).json({ msg: "Post not found" });
 
     if (post.createdBy.toString() !== req.user._id.toString()) {
-      return res.status(403).json({ msg: "Not authorized to delete this post" });
+      return res
+        .status(403)
+        .json({ msg: "Not authorized to delete this post" });
     }
 
     await post.deleteOne();

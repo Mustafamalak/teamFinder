@@ -40,7 +40,7 @@ export default function Home() {
 
             <h1 className="max-w-4xl text-5xl font-black leading-tight tracking-tight md:text-7xl">
               Find the right{" "}
-              <span className="bg-gradient-to-r from-cyan-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-cyan-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
                 teammates
               </span>{" "}
               before the deadline.
@@ -55,7 +55,7 @@ export default function Home() {
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
               <Link
                 href="/signup"
-                className="rounded-2xl bg-gradient-to-r from-cyan-300 to-purple-300 px-7 py-4 text-center font-bold text-black transition hover:scale-[1.03]"
+                className="rounded-2xl bg-linear-to-r from-cyan-300 to-purple-300 px-7 py-4 text-center font-bold text-black transition hover:scale-[1.03]"
               >
                 Start Finding Teams
               </Link>
@@ -71,7 +71,9 @@ export default function Home() {
             <div className="mt-12 grid max-w-2xl gap-4 sm:grid-cols-3">
               <div className="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur-xl">
                 <p className="text-3xl font-black">01</p>
-                <p className="mt-2 text-sm text-gray-400">Create your profile</p>
+                <p className="mt-2 text-sm text-gray-400">
+                  Create your profile
+                </p>
               </div>
 
               <div className="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur-xl">
@@ -87,7 +89,7 @@ export default function Home() {
           </div>
 
           <div className="relative">
-            <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-r from-cyan-300/20 to-purple-400/20 blur-3xl" />
+            <div className="absolute inset-0 rounded-[2rem] bg-linear-to-r from-cyan-300/20 to-purple-400/20 blur-3xl" />
 
             <div className="relative rotate-1 rounded-[2rem] border border-white/10 bg-white/10 p-5 shadow-2xl backdrop-blur-xl transition hover:rotate-0">
               <div className="rounded-[1.5rem] border border-white/10 bg-black/30 p-5">
