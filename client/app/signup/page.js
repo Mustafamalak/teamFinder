@@ -40,14 +40,15 @@ export default function Signup() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.msg || "Signup failed");
+        toast.error(data.msg || "Signup failed");
         return;
       }
 
       localStorage.setItem("token", data.token);
+      toast.success("Signup successful");
       router.replace("/dashboard");
     } catch (error) {
-      alert("Something went wrong");
+      toast.error("Something went wrong");
     } finally {
       setLoading(false);
     }

@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+
 import Link from "next/link";
 import API_URL from "../../utils/api";
 import LogoutButton from "../../components/LogoutButton";
@@ -29,13 +31,13 @@ export default function MyRequests() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.msg || "Failed to fetch requests");
+        toast.error(data.msg || "Failed to fetch requests");
         return;
       }
 
       setRequests(data);
     } catch (error) {
-      alert("Something went wrong");
+      toast.error("Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -45,6 +47,7 @@ export default function MyRequests() {
     const token = localStorage.getItem("token");
 
     if (!token) {
+      toast.error("Please login first");
       router.replace("/login");
       return;
     }

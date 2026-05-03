@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+
 import Link from "next/link";
 import API_URL from "../../utils/api";
 import LogoutButton from "../../components/LogoutButton";
@@ -42,7 +44,7 @@ export default function Profile() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.msg || "Failed to fetch profile");
+        toast.error(data.msg || "Failed to fetch profile");
         return;
       }
 
@@ -53,7 +55,7 @@ export default function Profile() {
         experienceLevel: data.experienceLevel || "Beginner",
       });
     } catch (error) {
-      alert("Something went wrong while loading profile");
+      toast.error("Something went wrong while loading profile");
     } finally {
       setLoading(false);
     }
@@ -93,13 +95,13 @@ export default function Profile() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.msg || "Failed to update profile");
+        toast.error(data.msg || "Failed to update profile");
         return;
       }
 
-      alert("Profile updated successfully");
+      toast.success("Profile updated successfully");
     } catch (error) {
-      alert("Something went wrong while updating profile");
+      toast.error("Something went wrong while updating profile");
     } finally {
       setSaving(false);
     }
@@ -109,6 +111,7 @@ export default function Profile() {
     const token = localStorage.getItem("token");
 
     if (!token) {
+      toast.error("Please login first");
       router.replace("/login");
       return;
     }

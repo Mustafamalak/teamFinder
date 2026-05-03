@@ -2,7 +2,7 @@ const Post = require("../models/post");
 
 // CREATE POST
 exports.createPost = async (req, res) => {
-  const { title, description, requiredSkills, teamSize } = req.body;
+  const { title, description, requiredSkills, teamSize, hackathonId } = req.body;
 
   if (!title || !description || !teamSize) {
     return res
@@ -19,6 +19,7 @@ exports.createPost = async (req, res) => {
   try {
     const post = await Post.create({
       createdBy: req.user._id,
+      hackathonId: hackathonId || undefined,
       title,
       description,
       requiredSkills: requiredSkills || [],
@@ -28,7 +29,7 @@ exports.createPost = async (req, res) => {
 
     res.status(201).json(post);
   } catch (error) {
-    console.error(error.message);
+    console.error(error.message); 
     res.status(500).json({ msg: "Server error" });
   }
 };
@@ -108,7 +109,7 @@ exports.updatePost = async (req, res) => {
         .json({ msg: "Not authorized to update this post" });
     }
 
-    const { title, description, requiredSkills, teamSize } = req.body;
+    const { title, description, requiredSkills, teamSize} = req.body;
 
     if (teamSize !== undefined && (isNaN(teamSize) || teamSize < 2)) {
       return res

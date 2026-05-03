@@ -23,6 +23,7 @@ app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/user", require("./routes/userRoutes"));
 app.use("/api/posts", require("./routes/postRoutes"));
 app.use("/api/requests", require("./routes/requestRoutes"));
+app.use("/api/hackathons", require("./routes/hackathonRoutes"));
 app.use(errorHandler);
 
 app.get("/", (req, res) => {

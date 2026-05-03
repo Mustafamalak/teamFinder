@@ -7,6 +7,12 @@ const postSchema = new mongoose.Schema(
       ref: "user",
       required: true,
     },
+
+    hackathonId: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "hackathon",
+},
+
     title: { type: String, required: true },
     description: { type: String, required: true },
     requiredSkills: [{ type: String }],

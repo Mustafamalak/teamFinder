@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import Link from "next/link";
 import API_URL from "../../utils/api";
 
@@ -39,14 +40,15 @@ export default function Login() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.msg || "Login failed");
+        toast.error(data.msg || "Login failed");
         return;
       }
 
       localStorage.setItem("token", data.token);
+      toast.success("Login successful");
       router.replace("/dashboard");
     } catch (error) {
-      alert("Something went wrong");
+      toast.error("Something went wrong");
     } finally {
       setLoading(false);
     }

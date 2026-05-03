@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import toast from "react-hot-toast";
 
 import Link from "next/link";
 import API_URL from "../../utils/api";
@@ -9,6 +10,8 @@ import LogoutButton from "../../components/LogoutButton";
 
 export default function CreatePost() {
   const router = useRouter();
+
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -18,12 +21,16 @@ export default function CreatePost() {
     }
   }, [router]);
 
-  const [form, setForm] = useState({
-    title: "",
-    description: "",
-    requiredSkills: "",
-    teamSize: "",
-  });
+  const hackathonId = searchParams.get("hackathonId");
+
+const [form, setForm] = useState({
+  title: hackathonId ? `Looking for teammates for ${hackathonId}` : "",
+  description: hackathonId
+    ? `Planning to participate in ${hackathonId}. Looking for teammates with relevant skills to build and submit a strong project.`
+    : "",
+  requiredSkills: "",
+  teamSize: "",
+});
 
   const [loading, setLoading] = useState(false);
 
@@ -45,7 +52,7 @@ export default function CreatePost() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      alert("Please login first");
+      toast.error("Please login first");
       router.push("/login");
       return;
     }
@@ -55,10 +62,11 @@ export default function CreatePost() {
       description: form.description.trim(),
       requiredSkills: skillsPreview,
       teamSize: Number(form.teamSize),
+      hackathonId: hackathonId || undefined,
     };
 
     if (!payload.title || !payload.description || !payload.teamSize) {
-      alert("Please fill all required fields");
+      toast.error("Please fill all required fields");
       return;
     }
 
@@ -77,13 +85,14 @@ export default function CreatePost() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.msg || "Failed to create post");
+        toast.error(data.msg || "Failed to create post");
         return;
       }
 
+      toast.success("Post created successfully");
       router.push("/dashboard");
     } catch (error) {
-      alert("Something went wrong while creating post");
+      toast.error("Something went wrong while creating post");
     } finally {
       setLoading(false);
     }
@@ -129,6 +138,15 @@ export default function CreatePost() {
               Share what you are building, what skills you need, and how many
               people can join your team.
             </p>
+
+            {hackathonId && (
+              <div className="mt-6 rounded-3xl border border-cyan-300/20 bg-cyan-300/10 p-5">
+                <p className="text-sm text-cyan-200">Creating team for</p>
+                <p className="mt-1 text-lg font-bold text-white">
+                  {hackathonId}
+                </p>
+              </div>
+            )}
 
             <div className="mt-8 space-y-4">
               <div className="rounded-2xl border border-white/10 bg-black/20 p-5">

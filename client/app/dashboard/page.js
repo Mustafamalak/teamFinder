@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+
 import Link from "next/link";
 import API_URL from "../../utils/api";
 import LogoutButton from "@/components/LogoutButton";
@@ -123,7 +125,7 @@ export default function Dashboard() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      alert("Please login first");
+      toast.error("Please login first");
       return;
     }
 
@@ -138,13 +140,13 @@ export default function Dashboard() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.msg || "Request failed");
+        toast.error(data.msg || "Request failed");
         return;
       }
 
-      alert("Join request sent successfully");
+      toast.success("Join request sent successfully");
     } catch (error) {
-      alert("Something went wrong");
+      toast.error("Something went wrong");
     }
   };
 
@@ -179,6 +181,12 @@ export default function Dashboard() {
               className="rounded-2xl border border-white/10 bg-black/20 px-5 py-2.5 text-sm font-semibold text-white transition hover:scale-105 hover:bg-white hover:text-black"
             >
               Profile
+            </Link>
+            <Link
+              href="/hackathons"
+              className="rounded-2xl border border-white/10 bg-black/20 px-5 py-2.5 text-sm font-semibold text-white transition hover:scale-105 hover:bg-white hover:text-black"
+            >
+              Hackathons
             </Link>
             <Link
               href="/my-requests"
